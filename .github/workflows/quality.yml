@@ -22,12 +22,13 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Scan with Gitleaks
-        uses: gitleaks/gitleaks-action@v3
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITLEAKS_ENABLE_COMMENTS: "false"
-          GITLEAKS_ENABLE_UPLOAD_ARTIFACT: "false"
+      - name: Scan full Git history with Gitleaks
+        run: |
+          docker run --rm \
+            --volume "$GITHUB_WORKSPACE:/repo" \
+            --workdir /repo \
+            ghcr.io/gitleaks/gitleaks:v8.24.3 \
+            git --redact --verbose
 
   frontend:
     name: Frontend checks
