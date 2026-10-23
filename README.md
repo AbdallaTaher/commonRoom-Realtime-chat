@@ -1,6 +1,6 @@
 # Commonroom
 
-Commonroom is a real-time chat app built as a portfolio project. It includes private one-to-one conversations, groups, member profiles, live presence, read receipts, and a public interactive demo that visitors can try without creating an account.
+Commonroom is a real-time chat app. It includes private one-to-one conversations, groups, member profiles, live presence, read receipts, and a public interactive demo that visitors can try without creating an account.
 
 The `/demo` experience uses fictional sample conversations and keeps messages in browser memory. Demo activity is not sent to Supabase and resets when the page is refreshed or left.
 
