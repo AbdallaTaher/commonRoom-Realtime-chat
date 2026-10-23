@@ -1,109 +1,137 @@
-<a href="https://demo-nextjs-with-supabase.vercel.app/">
-  <img alt="Next.js and Supabase Starter Kit - the fastest way to build apps with Next.js and Supabase" src="https://demo-nextjs-with-supabase.vercel.app/opengraph-image.png">
-  <h1 align="center">Next.js and Supabase Starter Kit</h1>
-</a>
+# Commonroom
 
-<p align="center">
- The fastest way to build apps with Next.js and Supabase
-</p>
+Commonroom is a real-time chat app built as a portfolio project. It includes private one-to-one conversations, groups, member profiles, live presence, read receipts, and a public interactive demo that visitors can try without creating an account.
 
-<p align="center">
-  <a href="#features"><strong>Features</strong></a> ·
-  <a href="#demo"><strong>Demo</strong></a> ·
-  <a href="#deploy-to-vercel"><strong>Deploy to Vercel</strong></a> ·
-  <a href="#clone-and-run-locally"><strong>Clone and run locally</strong></a> ·
-  <a href="#feedback-and-issues"><strong>Feedback and issues</strong></a>
-  <a href="#more-supabase-examples"><strong>More Examples</strong></a>
-</p>
-<br/>
+The `/demo` experience uses fictional sample conversations and keeps messages in browser memory. Demo activity is not sent to Supabase and resets when the page is refreshed or left.
 
 ## Features
 
-- Works across the entire [Next.js](https://nextjs.org) stack
-  - App Router
-  - Pages Router
-  - Proxy
-  - Client
-  - Server
-  - It just works!
-- supabase-ssr. A package to configure Supabase Auth to use cookies
-- Password-based authentication block installed via the [Supabase UI Library](https://supabase.com/ui/docs/nextjs/password-based-auth)
-- Styling with [Tailwind CSS](https://tailwindcss.com)
-- Components with [shadcn/ui](https://ui.shadcn.com/)
-- Optional deployment with [Supabase Vercel Integration and Vercel deploy](#deploy-your-own)
-  - Environment variables automatically assigned to Vercel project
+- Email and password sign-up, sign-in, password reset, and protected workspace routes.
+- Direct conversations and group chats with member and owner permissions.
+- Live messages and presence using Supabase Realtime.
+- Unread counts, read receipts, profile bios, and avatar uploads.
+- Responsive inbox with light and dark themes.
+- Public portfolio demo with sample data and no account requirement.
+- Database access protected by Supabase Row Level Security (RLS).
 
-## Demo
+## Technology
 
-You can view a fully working demo at [demo-nextjs-with-supabase.vercel.app](https://demo-nextjs-with-supabase.vercel.app/).
+- Next.js App Router and React 19
+- TypeScript
+- Tailwind CSS and Radix UI primitives
+- Supabase Auth, PostgreSQL, Storage, and Realtime
+- Jest and React Testing Library
+- Playwright across Chromium, Firefox, and WebKit
+- GitHub Actions for lint, type, unit, dependency, secret-scan, build, and browser checks
+- Vercel for hosting
 
-## Deploy to Vercel
+## Project structure
 
-Vercel deployment will guide you through creating a Supabase account and project.
+```text
+.
+├── .github/workflows/       # GitHub Actions quality gates
+├── frontend/                # Next.js application
+│   ├── app/                 # Pages, layouts, route handlers
+│   ├── components/          # Shared and feature UI
+│   ├── e2e/                 # Playwright browser tests
+│   ├── features/            # Feature-oriented application code
+│   ├── lib/                 # Validation, actions, Supabase clients
+│   └── public/              # Static assets, including the chat background
+├── supabase/migrations/     # Ordered SQL migrations and access policies
+├── tests/                   # Shared test fixtures and support
+└── ui-prototypes/           # Approved design references
+```
 
-After installation of the Supabase integration, all relevant environment variables will be assigned to the project so the deployment is fully functioning.
+## Run locally
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fwith-supabase&project-name=nextjs-with-supabase&repository-name=nextjs-with-supabase&demo-title=nextjs-with-supabase&demo-description=This+starter+configures+Supabase+Auth+to+use+cookies%2C+making+the+user%27s+session+available+throughout+the+entire+Next.js+app+-+Client+Components%2C+Server+Components%2C+Route+Handlers%2C+Server+Actions+and+Middleware.&demo-url=https%3A%2F%2Fdemo-nextjs-with-supabase.vercel.app%2F&external-id=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fwith-supabase&demo-image=https%3A%2F%2Fdemo-nextjs-with-supabase.vercel.app%2Fopengraph-image.png)
+### Requirements
 
-The above will also clone the Starter kit to your GitHub, you can clone that locally and develop locally.
+- Node.js 20.9 or newer (Node.js 22 LTS is also suitable).
+- npm.
+- A Supabase project for account-based features. The public `/demo` page does not require Supabase credentials.
 
-If you wish to just develop locally and not deploy to Vercel, [follow the steps below](#clone-and-run-locally).
+### Setup
 
-## Clone and run locally
+1. Open a terminal in the repository's `frontend/` folder.
+2. Copy `frontend/.env.example` to `frontend/.env.local`.
+3. In Supabase, open **Project Settings → API** and copy the Project URL and publishable key into `.env.local`:
 
-1. You'll first need a Supabase project which can be made [via the Supabase dashboard](https://database.new)
-
-2. Create a Next.js app using the Supabase Starter template npx command
-
-   ```bash
-   npx create-next-app --example with-supabase with-supabase-app
+   ```dotenv
+   NEXT_PUBLIC_SUPABASE_URL=https://YOUR-PROJECT-REF.supabase.co
+   NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=YOUR_SUPABASE_PUBLISHABLE_KEY
+   NEXT_PUBLIC_SITE_URL=http://localhost:3000
    ```
 
-   ```bash
-   yarn create next-app --example with-supabase with-supabase-app
-   ```
+4. Install locked dependencies and start the development server:
 
    ```bash
-   pnpm create next-app --example with-supabase with-supabase-app
-   ```
-
-3. Use `cd` to change into the app's directory
-
-   ```bash
-   cd with-supabase-app
-   ```
-
-4. Rename `.env.example` to `.env.local` and update the following:
-
-  ```env
-  NEXT_PUBLIC_SUPABASE_URL=[INSERT SUPABASE PROJECT URL]
-  NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=[INSERT SUPABASE PROJECT API PUBLISHABLE OR ANON KEY]
-  ```
-  > [!NOTE]
-  > This example uses `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`, which refers to Supabase's new **publishable** key format.
-  > Both legacy **anon** keys and new **publishable** keys can be used with this variable name during the transition period. Supabase's dashboard may show `NEXT_PUBLIC_SUPABASE_ANON_KEY`; its value can be used in this example.
-  > See the [full announcement](https://github.com/orgs/supabase/discussions/29260) for more information.
-
-  Both `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` can be found in [your Supabase project's API settings](https://supabase.com/dashboard/project/_?showConnect=true)
-
-5. You can now run the Next.js local development server:
-
-   ```bash
+   npm ci
    npm run dev
    ```
 
-   The starter kit should now be running on [localhost:3000](http://localhost:3000/).
+5. Open `http://localhost:3000`. To try the account-free sample, select **Try the interactive demo** or open `http://localhost:3000/demo`.
 
-6. This template comes with the default shadcn/ui style initialized. If you instead want other ui.shadcn styles, delete `components.json` and [re-install shadcn/ui](https://ui.shadcn.com/docs/installation/next)
+For database setup, apply the SQL files in `supabase/migrations/` in timestamp order to your Supabase project. Do not expose a Supabase service-role key in the browser or commit it to GitHub. The publishable key is designed to be public; RLS policies must remain enabled for protected data.
 
-> Check out [the docs for Local Development](https://supabase.com/docs/guides/getting-started/local-development) to also run Supabase locally.
+## Checks
 
-## Feedback and issues
+Run these from `frontend/`:
 
-Please file feedback and issues over on the [Supabase GitHub org](https://github.com/supabase/supabase/issues/new/choose).
+```bash
+npm run lint
+npm run typecheck
+npm run test:ci
+npm run build
+```
 
-## More Supabase examples
+For browser tests, install the Playwright browsers once and run the suite:
 
-- [Next.js Subscription Payments Starter](https://github.com/vercel/nextjs-subscription-payments)
-- [Cookie-based Auth and the Next.js 13 App Router (free course)](https://youtube.com/playlist?list=PL5S4mPUpp4OtMhpnp93EFSo42iQ40XjbF)
-- [Supabase Auth and the Next.js App Router](https://github.com/supabase/supabase/tree/master/examples/auth/nextjs)
+```bash
+npx playwright install chromium firefox webkit
+npm run e2e
+```
+
+Most browser checks run without real accounts. Supabase-backed E2E flows are opt-in and must use a dedicated non-production test project. See [frontend/README.md](frontend/README.md) for the optional test environment variables. Never configure mutating E2E tests against production.
+
+## Deploy on Vercel
+
+The deployable Next.js app is in `frontend/`. When importing the GitHub repository into Vercel, set **Root Directory** to `frontend`; leave the framework preset as **Next.js** and use the detected install/build settings.
+
+Add these variables in **Vercel → Project → Settings → Environment Variables**:
+
+| Variable | Value | Environments |
+| --- | --- | --- |
+| `NEXT_PUBLIC_SUPABASE_URL` | Supabase Project URL | Production, Preview, Development |
+| `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Supabase publishable key | Production, Preview, Development |
+| `NEXT_PUBLIC_SITE_URL` | The public production origin, e.g. `https://your-domain.vercel.app` | Production |
+
+Use your own Supabase project values. Do not add `SUPABASE_SERVICE_ROLE_KEY`; this application uses the publishable key and user sessions with RLS. The `NEXT_PUBLIC_` prefix means a value can be included in browser code, so only the publishable key belongs there. After adding or changing Vercel variables, create a new deployment for the new values to take effect.
+
+In Supabase, open **Authentication → URL Configuration** after the Vercel URL is known:
+
+1. Set **Site URL** to the production URL.
+2. Add `https://YOUR-PRODUCTION-DOMAIN/**` to **Redirect URLs**. The app uses `/auth/callback` for email confirmation and password reset.
+3. For Vercel preview deployments, optionally allow the preview domain pattern recommended in the Supabase URL Configuration guide. Keep the exact production URL configured for production use.
+4. If you later add a custom domain, update `NEXT_PUBLIC_SITE_URL`, the Supabase Site URL, and the allowed redirect URLs, then redeploy.
+
+Email sign-up and password reset should be tested from the deployed production URL before sharing the project. Google sign-in is intentionally not configured.
+
+## GitHub and deployment checklist
+
+- Keep `.env.local`, all `.env` files except `.env.example`, dependency folders, build output, test reports, and Vercel local state out of Git. The root `.gitignore` covers these paths.
+- Use a GitHub repository rooted at this project directory so the repository includes `frontend/`, `supabase/`, `.github/`, and project documentation.
+- The repository currently has Git metadata in `frontend/.git`. Before the first root-level GitHub push, preserve that history by moving the `.git` directory from `frontend/` to this repository root. Do not create a second repository inside `frontend/`.
+- GitHub Actions runs the quality workflow in `.github/workflows/quality.yml`. Credential-free checks run without secrets; the Supabase mutation E2E tests stay disabled unless dedicated test-project Actions secrets are deliberately configured.
+- In Vercel, import the GitHub repository and choose `frontend` as the Root Directory. Pushes to the production branch will then trigger deployments.
+- Review the license choice before making the repository public. No license has been added because the project owner should choose the reuse terms.
+
+## Security notes
+
+- Never commit `.env.local`, passwords, private keys, Supabase service-role keys, or production credentials.
+- If a secret was ever committed, removing the file is not enough: rotate the credential and clean the exposed Git history before publishing.
+- Keep Supabase RLS enabled and review database migrations before applying them to a production project.
+- The portfolio demo is isolated from Supabase and uses fictional data.
+
+## License
+
+No license has been selected yet. Until one is added, others do not have an explicit grant to reuse this code.

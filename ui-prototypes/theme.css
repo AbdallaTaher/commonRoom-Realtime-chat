@@ -1,0 +1,19 @@
+html.dark body{background:#11121b!important;color:#f3f2fa!important}
+html.dark #themeToggle{background:#242536!important;color:#f4f3fb!important;border-color:#41435a!important}
+html.dark .glass{background:rgba(27,28,42,.96);color:#f4f3fb;box-shadow:0 28px 90px rgba(0,0,0,.48)}
+html.dark .glass input{background:#202132;color:#f4f3fb;border-color:#3b3d52}
+html.dark .glass input::placeholder{color:#8589a1}
+
+html.dark .glass .text-slate-500,html.dark .glass .text-slate-400{color:#aeb0c3}
+html.dark .glass [class*="bg-white"]{background-color:#252638!important}
+html.dark .glass [class*="border-slate-"]{border-color:#3b3d52!important}
+html.dark #shell,html.dark #shell aside,html.dark #shell nav,html.dark #shell header{background-color:#171824!important;color:#f3f2fa}
+html.dark #shell [class*="bg-white"]{background-color:#222333!important}
+html.dark #shell [class*="bg-slate-50"],html.dark #shell [class*="bg-slate-100"]{background-color:#242536!important}
+html.dark #shell [class*="border-slate-"]{border-color:#303144!important}
+html.dark #shell [class*="text-slate-500"],html.dark #shell [class*="text-slate-400"]{color:#aeb0c3!important}
+html.dark #shell input,html.dark #shell textarea{color:#f4f3fb}
+html.dark #shell input::placeholder,html.dark #shell textarea::placeholder{color:#898ca3}
+html.dark #shell .wall>[class*="bg-white"]{background-color:rgba(17,18,27,.78)!important}
+html.dark #shell .wall>[class*="bg-[#f9f8ff]"]{background-color:rgba(17,18,27,.78)!important}
+html.dark #shell dialog{background:#1c1d2a;color:#f3f2fa}
