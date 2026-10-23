@@ -2,6 +2,8 @@
 
 Commonroom is a real-time chat app. It includes private one-to-one conversations, groups, member profiles, live presence, read receipts, and a public interactive demo that visitors can try without creating an account.
 
+**Live app:** [commonroom-chat-app.vercel.app](https://commonroom-chat-app.vercel.app/) · **Try without signing up:** [Interactive demo](https://commonroom-chat-app.vercel.app/demo)
+
 The `/demo` experience uses fictional sample conversations and keeps messages in browser memory. Demo activity is not sent to Supabase and resets when the page is refreshed or left.
 
 ## Features
